@@ -1,0 +1,4 @@
+enableFeaturePreview("VERSION_CATALOGS")
+
+rootProject.name = 'Servine'
+include('app', 'redirects-parser', 'redirects-ktor', 'samples')

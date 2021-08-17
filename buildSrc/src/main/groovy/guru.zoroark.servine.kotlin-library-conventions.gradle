@@ -1,0 +1,13 @@
+plugins {
+    // Apply the common convention plugin for shared build configuration between library and application projects.
+    id 'guru.zoroark.servine.kotlin-common-conventions'
+
+    // Apply the java-library plugin for API and implementation separation.
+    id 'java-library'
+
+    id 'org.jetbrains.kotlinx.binary-compatibility-validator'
+}
+
+kotlin {
+    explicitApi()
+}

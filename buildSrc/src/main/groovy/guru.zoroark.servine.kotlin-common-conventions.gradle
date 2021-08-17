@@ -1,0 +1,38 @@
+plugins {
+    // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.dokka'
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+def libs = project.extensions.getByType(VersionCatalogsExtension).named("libs")
+
+dependencies {
+    // Use the Kotlin JDK 8 standard library.
+    implementation libs.kotlin.stdlib
+
+    // Use JUnit Jupiter for testing.
+    testImplementation libs.junit.jupiter
+    // Use Spek and Atrium for better tests
+    testImplementation libs.atrium
+    testImplementation libs.kotlin.reflect
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
+
+tasks.withType(DokkaTaskPartial).configureEach {
+    dokkaSourceSets {
+        configureEach {
+            includes.from("module.md")
+        }
+    }
+}

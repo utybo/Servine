@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+def createSampleTaskForSourceSet(String sourceSampleDir) {
+    tasks.register(
+            'runSample' + sourceSampleDir[0].toUpperCase() + sourceSampleDir[1..-1],
+            JavaExec
+    ) {
+        classpath = project(":app").sourceSets.main.runtimeClasspath
+        mainClass = 'guru.zoroark.servine.app.AppKt'
+
+        args project.layout.projectDirectory.dir(sourceSampleDir).toString()
+    }
+}
+
+def samples = ['basic']
+samples.forEach(it -> createSampleTaskForSourceSet(it))

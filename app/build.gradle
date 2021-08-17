@@ -1,0 +1,15 @@
+plugins {
+    id 'guru.zoroark.servine.kotlin-application-conventions'
+}
+
+dependencies {
+    implementation project(':redirects-ktor')
+    implementation libs.clikt
+    implementation libs.ktor.server.netty
+    implementation libs.logback
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'guru.zoroark.servine.app.AppKt'
+}
