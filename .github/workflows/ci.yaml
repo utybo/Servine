@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           java-version: '11'
-          distrubution: 'adopt'
+          distribution: 'adopt'
       - name: Ensure gradlew script is executable
         run: chmod +x ./gradlew
       - name: Compile project
