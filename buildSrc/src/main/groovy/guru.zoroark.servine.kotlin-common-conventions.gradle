@@ -11,6 +11,9 @@ repositories {
 
 def libs = project.extensions.getByType(VersionCatalogsExtension).named("libs")
 
+version = rootProject.version
+group = rootProject.group
+
 dependencies {
     // Use the Kotlin JDK 8 standard library.
     implementation libs.kotlin.stdlib
@@ -33,6 +36,12 @@ tasks.withType(DokkaTaskPartial).configureEach {
     dokkaSourceSets {
         configureEach {
             includes.from("module.md")
+
+            sourceLink {
+                localDirectory = "src/main/kotlin"
+                remoteUrl = java.net.URL("https://github.com/utybo/Servine/blob/main/" + project.name + "/src/main/kotlin")
+                remoteLineSuffix = "#L"
+            }
         }
     }
 }

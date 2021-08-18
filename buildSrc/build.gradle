@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    implementation libs.kotlin.gradlePlugin
+    implementation libs.kotlin.gradle
     implementation libs.kotlin.dokkaGradle
     implementation libs.kotlin.bcv
 }

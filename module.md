@@ -1,3 +1,0 @@
-# Module redirects-ktor
-
-Hello!

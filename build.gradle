@@ -5,3 +5,6 @@ plugins {
 repositories {
     mavenCentral()
 }
+
+version = "0.0.1-SNAPSHOT"
+group = "guru.zoroark.servine"
