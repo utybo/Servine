@@ -14,8 +14,6 @@ jobs:
         with:
           java-version: '16'
           distribution: 'adopt'
-      - name: Ensure gradlew script is executable
-        run: chmod +x ./gradlew
       - name: Compile project
         run: ./gradlew assemble
       - name: Run checks
