@@ -1,20 +1,14 @@
 package guru.zoroark.servine.redirects.ktor
 
+import guru.zoroark.servine.redirects.ktor.Redirects.Feature.Redirection
 import guru.zoroark.servine.redirects.parser.Redirection
 import guru.zoroark.servine.redirects.parser.parseRedirections
-import io.ktor.application.ApplicationCall
-import io.ktor.application.ApplicationCallPipeline
-import io.ktor.application.ApplicationFeature
-import io.ktor.application.call
-import io.ktor.http.HttpStatusCode
-import io.ktor.http.RequestConnectionPoint
-import io.ktor.request.ApplicationRequest
-import io.ktor.request.path
-import io.ktor.response.ApplicationSendPipeline
-import io.ktor.response.respondRedirect
-import io.ktor.util.AttributeKey
-import io.ktor.util.pipeline.PipelineContext
-import io.ktor.util.pipeline.PipelinePhase
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.request.*
+import io.ktor.response.*
+import io.ktor.util.*
+import io.ktor.util.pipeline.*
 import java.nio.file.Files
 import java.nio.file.Path
 
@@ -59,10 +53,12 @@ public class Redirects(configuration: Configuration) {
 
     public companion object Feature :
         ApplicationFeature<ApplicationCallPipeline, Configuration, Redirects> {
-        override val key: AttributeKey<Redirects> = AttributeKey<Redirects>("Redirects")
+        override val key: AttributeKey<Redirects> = AttributeKey("Redirects")
         private val Redirection = PipelinePhase("Redirection")
         internal val OverrideStatusCode =
             AttributeKey<HttpStatusCode>("OverrideStatusCode")
+        public val DoNotRedirect: AttributeKey<Unit> =
+            AttributeKey("DoNotRedirect")
 
         override fun install(
             pipeline: ApplicationCallPipeline,
@@ -73,9 +69,8 @@ public class Redirects(configuration: Configuration) {
                 ApplicationCallPipeline.Fallback,
                 Redirection
             )
-            pipeline.intercept(Redirection) {
-                feature.fallbackIntercepted(this)
-            }
+            pipeline.intercept(Redirection) { feature.fallbackIntercepted(this) }
+
             pipeline.sendPipeline.intercept(ApplicationSendPipeline.Before) {
                 feature.sendIntercepted(this)
             }
@@ -86,6 +81,8 @@ public class Redirects(configuration: Configuration) {
     private suspend fun fallbackIntercepted(
         ctx: PipelineContext<Unit, ApplicationCall>
     ): Unit = with(ctx) {
+        if (call.attributes.getOrNull(DoNotRedirect) != null)
+            return
         val rule = redirects.firstOrNull { it.matches(call) } ?: return
         respondTo(rule)
         finish()
@@ -124,6 +121,7 @@ public class Redirects(configuration: Configuration) {
     private suspend fun sendIntercepted(
         ctx: PipelineContext<Any, ApplicationCall>
     ) = with(ctx) {
+        call.attributes.put(DoNotRedirect, Unit)
         call.attributes.getOrNull(OverrideStatusCode)?.let { override ->
             call.response.status(override)
         }
@@ -137,8 +135,19 @@ public class Redirects(configuration: Configuration) {
     }
 }
 
-private fun Redirection.matches(call: ApplicationCall) =
-    call.request.path() == from
+private fun Redirection.matches(call: ApplicationCall): Boolean {
+    val path = call.request.path()
+    return when {
+        path == from -> true
+        splat -> {
+            val fromComponents = from.split('/').filter { it.isNotEmpty() }
+            val pathComponents = path.split('/').filter { it.isNotEmpty() }
+                .take(fromComponents.size)
+            fromComponents == pathComponents
+        }
+        else -> false
+    }
+}
 
 /**
  * Parses and adds redirection rules from the given path. This path may denote

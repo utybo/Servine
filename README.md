@@ -21,7 +21,8 @@ Refer to the following for compatibility information
 | Rewrites                      | ✅ | ✅ | ✅ |
 | Shadowing                     | ❌ | ❌ | ❌ |
 | HTTP Status codes             | ✅ | ✳️ (1) | ✳️ (1) |
-| Splats                        | ❌ | ❌ | ❌ |
+| Splats (`*`)                  | ✅ | ✅ | ✅ |
+| Splats (`:splat`)             | ❌ | ❌ | ❌ |
 | Placeholders                  | ❌ | ❌ | ❌ |
 | Query parameters              | ❌ | ❌ | ❌ |
 | Trailing slash handling       | ❌ | ❌ | ❌ |

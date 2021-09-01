@@ -9,6 +9,7 @@ public final class guru/zoroark/servine/redirects/ktor/Redirects$Configuration {
 }
 
 public final class guru/zoroark/servine/redirects/ktor/Redirects$Feature : io/ktor/application/ApplicationFeature {
+	public final fun getDoNotRedirect ()Lio/ktor/util/AttributeKey;
 	public fun getKey ()Lio/ktor/util/AttributeKey;
 	public fun install (Lio/ktor/application/ApplicationCallPipeline;Lkotlin/jvm/functions/Function1;)Lguru/zoroark/servine/redirects/ktor/Redirects;
 	public synthetic fun install (Lio/ktor/util/pipeline/Pipeline;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;

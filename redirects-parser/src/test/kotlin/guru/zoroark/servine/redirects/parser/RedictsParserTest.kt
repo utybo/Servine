@@ -153,4 +153,22 @@ class RedictsParserTest {
             )
         )
     }
+
+    @Test
+    fun `Correct splat`() {
+        val res = parseRedirections(
+            """
+            /*          /allSplat
+            /some/*     /notAllSplat
+            /wow/*      /splatWithStatus    123
+            """.trimIndent()
+        )
+        expect(res).toBe(
+            listOf(
+                Redirection("/", "/allSplat", splat = true),
+                Redirection("/some", "/notAllSplat", splat = true),
+                Redirection("/wow", "/splatWithStatus", 123, true)
+            )
+        )
+    }
 }

@@ -1,9 +1,10 @@
 package guru.zoroark.servine.redirects.parser
 
-private val PATTERN = Regex("(.+?)[\t ]+(.+?)(?:[\t ]+(\\d+))?")
+private val PATTERN = Regex("(.+?)((?:/|(?<=/))\\*)?[\t ]+(.+?)(?:[\t ]+(\\d+))?")
 private const val MATCH_GROUP_FROM = 1
-private const val MATCH_GROUP_TO = 2
-private const val MATCH_GROUP_STATUS_CODE = 3
+private const val MATCH_GROUP_SPLAT = 2
+private const val MATCH_GROUP_TO = 3
+private const val MATCH_GROUP_STATUS_CODE = 4
 
 public fun parseRedirections(from: String): List<Redirection> {
     if (from.isEmpty())
@@ -21,7 +22,8 @@ public fun parseRedirections(from: String): List<Redirection> {
             Redirection(
                 match.groupValues[MATCH_GROUP_FROM],
                 match.groupValues[MATCH_GROUP_TO],
-                statusCode ?: DEFAULT_STATUS_CODE
+                statusCode ?: DEFAULT_STATUS_CODE,
+                match.groupValues[MATCH_GROUP_SPLAT].isNotEmpty()
             )
         }.toList()
 }

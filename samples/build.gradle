@@ -14,5 +14,5 @@ def createSampleTaskForSourceSet(String sourceSampleDir) {
     }
 }
 
-def samples = ['basic']
+def samples = ['basic', 'docsify']
 samples.forEach(it -> createSampleTaskForSourceSet(it))

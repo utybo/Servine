@@ -25,6 +25,7 @@ fun Application.testModule() {
         redirections += Redirection("/from/404", "/to/404", 404)
         redirections += Redirection("/from/200", "/to/200", 200)
         redirections += Redirection("/from/200/actually403", "/to/200/actually403", 200)
+        redirections += Redirection("/from/splat", "/to", 200, true)
     }
 
     routing {
@@ -105,6 +106,25 @@ class RedirectFeatureTest {
             handleRequest(Get, "/from/200/actually403").apply {
                 expect(response.status()).toBe(HttpStatusCode.Forbidden)
                 expect(response.content).notToBeNull().toBe("No >:(")
+            }
+        }
+    }
+
+    @Test
+    fun `Splat redirect from base`() {
+        withTestApplication(Application::testModule) {
+            handleRequest(Get, "/from/splat").apply {
+                expect(response.status()).toBe(HttpStatusCode.OK)
+                expect(response.content).notToBeNull().toBe("We good!")
+            }
+        }
+    }
+    @Test
+    fun `Splat redirect from sub`() {
+        withTestApplication(Application::testModule) {
+            handleRequest(Get, "/from/splat/yes/no/maybe").apply {
+                expect(response.status()).toBe(HttpStatusCode.OK)
+                expect(response.content).notToBeNull().toBe("We good!")
             }
         }
     }

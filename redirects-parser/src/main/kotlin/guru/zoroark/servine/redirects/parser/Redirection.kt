@@ -12,5 +12,6 @@ public const val DEFAULT_STATUS_CODE: Int = 301
 public data class Redirection(
     val from: String,
     val to: String,
-    val statusCode: Int = DEFAULT_STATUS_CODE
+    val statusCode: Int = DEFAULT_STATUS_CODE,
+    val splat: Boolean = false
 )

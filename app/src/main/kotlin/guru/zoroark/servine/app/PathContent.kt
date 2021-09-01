@@ -52,6 +52,7 @@ private fun Path.readChannelButBetter(
                     position += result
                     buffer.flip()
                     channel.writeFully(buffer)
+                    buffer.clear()
                 }
             }
         }.channel
