@@ -21,7 +21,7 @@ import java.nio.file.Path
  * ```
  * install(Redirects) {
  *      // Use redirections from a `redirects_` file
- *      from("some/directory/_redirects")
+ *      from(Path.of("some/directory/_redirects"))
  *      // Manually add redirections
  *      redirections += Redirection("/from/this", "/to/that")
  * }
