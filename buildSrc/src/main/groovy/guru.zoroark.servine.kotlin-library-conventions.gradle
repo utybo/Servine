@@ -14,8 +14,9 @@ kotlin {
     explicitApi()
 }
 
-publishing {
-    if (project.version.endsWith('-SNAPSHOT') || project.hasProperty('allowNonSnapshotRelease')) {
+
+if (project.version.endsWith('-SNAPSHOT') || project.hasProperty('allowNonSnapshotRelease')) {
+    publishing {
         repositories {
             maven {
                 name = "GitHubPackages"
@@ -31,14 +32,15 @@ publishing {
                 from(components.java)
             }
         }
-    } else if (!project.endsWith('-SNAPSHOT')) {
-        // Security flag: this avoids accidentally publishing a would-be snapshot version via the CI on a main-branch push
-        // when the version string was not updated properly.
-        // Add -PallowNonSnapshotRelease to the Gradle command line to override this check.
-        logger.warn("Publishing non-snapshot version is disabled. Add property 'allowNonSnapshotRelease' to lift this restriction.")
-    } else {
-        // At this point, the version string is a snapshot version, but the project set to a release version.
-        // This is typically when the snapshot version string was not updated.
-        logger.error("Version string is a snapshot version, but property 'allowNonSnapshotRelease' is present.")
     }
+} else if (!project.version.endsWith('-SNAPSHOT')) {
+    // Security flag: this avoids accidentally publishing a would-be snapshot version via the CI on a main-branch push
+    // when the version string was not updated properly.
+    // Add -PallowNonSnapshotRelease to the Gradle command line to override this check.
+    logger.warn("Publishing non-snapshot version is disabled. Add property 'allowNonSnapshotRelease' to lift this restriction.")
+} else {
+    // At this point, the version string is a snapshot version, but the project set to a release version.
+    // This is typically when the snapshot version string was not updated.
+    logger.error("Version string is a snapshot version, but property 'allowNonSnapshotRelease' is present.")
 }
+
