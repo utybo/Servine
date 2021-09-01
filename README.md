@@ -33,9 +33,9 @@ Refer to the following for compatibility information
 
 ✅ Fully supported | 🔧 Can be optionally enabled | 🟡 Partially supported | ❌ Not supported | 🤷‍♂️ Not applicable
 
-1. These files can be given, but not all features are supported -- refer to the table to know which ones are.
+1. These files can be parsed, but not all features are supported -- refer to the table to know which ones are.
 2. Only status codes 302, 301, 404 and 200 are supported.
-3. The post-url `*` is supported, by the `:splat` placeholder is not.
+3. The post-url `*` is supported, but the `:splat` placeholder is not.
 4. Parsed as a regular string -- not exposed in any particular way. This is not actively tested and will be at a later date.
 
 ## `redirects-parser`
@@ -48,4 +48,4 @@ Refer to the following for compatibility information
 
 ## `servine`
 
-[See the module's README file for more information.](app/README.md)
+[See the module's README file for more information.](servine/README.md)
