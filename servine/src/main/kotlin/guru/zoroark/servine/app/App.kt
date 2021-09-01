@@ -2,29 +2,26 @@ package guru.zoroark.servine.app
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
-import com.github.ajalt.clikt.parameters.options.default
-import com.github.ajalt.clikt.parameters.options.option
 import guru.zoroark.servine.redirects.ktor.Redirects
 import guru.zoroark.servine.redirects.ktor.from
-import io.ktor.application.call
-import io.ktor.application.install
-import io.ktor.http.HttpStatusCode
-import io.ktor.http.content.files
-import io.ktor.http.content.static
-import io.ktor.response.respond
-import io.ktor.routing.get
-import io.ktor.routing.routing
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
-import io.ktor.util.normalizePathComponents
+import io.ktor.application.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
 import java.nio.file.Files
-import java.nio.file.NoSuchFileException
 import java.nio.file.Path
 import java.util.*
 
-class App : CliktCommand() {
-    private val directory: String by argument()
-    // private val defaultFile: String by option().default("index.html")
+class App : CliktCommand(
+    name = "servine",
+    help = """
+        Servine is a static file web server with support for '_redirects' files.
+
+        NOTE: DO NOT USE IN PRODUCTION ENVIRONMENTS. This is intended as a developer server and lacks critical security features.
+        """.trimIndent()
+) {
+    private val directory: String by argument(help = "The directory that should be served.")
 
     override fun run() {
         val server = embeddedServer(Netty, port = 8080) {
