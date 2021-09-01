@@ -7,7 +7,7 @@ def createSampleTaskForSourceSet(String sourceSampleDir) {
             'runSample' + sourceSampleDir[0].toUpperCase() + sourceSampleDir[1..-1],
             JavaExec
     ) {
-        classpath = project(":app").sourceSets.main.runtimeClasspath
+        classpath = project(":servine").sourceSets.main.runtimeClasspath
         mainClass = 'guru.zoroark.servine.app.AppKt'
 
         args project.layout.projectDirectory.dir(sourceSampleDir).toString()
