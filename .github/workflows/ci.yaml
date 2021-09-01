@@ -39,7 +39,7 @@ jobs:
       - name: Build
         run: ./gradlew build
       - name: Publish non-snapshot version
-        run: ./gradlew publish -PallowNonSnapshotVersion
+        run: ./gradlew publish -PallowNonSnapshotRelease
       - name: Create Servine distributions
         run: ./gradlew assembleDist
       - uses: actions/upload-artifact@v2
