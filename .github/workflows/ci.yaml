@@ -40,6 +40,9 @@ jobs:
         run: ./gradlew build
       - name: Publish non-snapshot version
         run: ./gradlew publish -PallowNonSnapshotRelease
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Create Servine distributions
         run: ./gradlew assembleDist
       - uses: actions/upload-artifact@v2
