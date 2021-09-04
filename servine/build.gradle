@@ -1,5 +1,6 @@
 plugins {
     id 'guru.zoroark.servine.kotlin-application-conventions'
+    id 'guru.zoroark.servine.kotlin-publish-conventions'
 }
 
 dependencies {

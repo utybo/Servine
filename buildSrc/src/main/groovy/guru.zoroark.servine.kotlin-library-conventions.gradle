@@ -2,6 +2,9 @@ plugins {
     // Apply the common convention plugin for shared build configuration between library and application projects.
     id 'guru.zoroark.servine.kotlin-common-conventions'
 
+    // Libraries should always be published.
+    id 'guru.zoroark.servine.kotlin-publish-conventions'
+
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
 
@@ -13,34 +16,3 @@ plugins {
 kotlin {
     explicitApi()
 }
-
-
-if (project.version.endsWith('-SNAPSHOT') || project.hasProperty('allowNonSnapshotRelease')) {
-    publishing {
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/utybo/Servine")
-                credentials {
-                    username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
-                    password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
-                }
-            }
-        }
-        publications {
-            gpr(MavenPublication) {
-                from(components.java)
-            }
-        }
-    }
-} else if (!project.version.endsWith('-SNAPSHOT')) {
-    // Security flag: this avoids accidentally publishing a would-be snapshot version via the CI on a main-branch push
-    // when the version string was not updated properly.
-    // Add -PallowNonSnapshotRelease to the Gradle command line to override this check.
-    logger.warn("Publishing non-snapshot version is disabled. Add property 'allowNonSnapshotRelease' to lift this restriction.")
-} else {
-    // At this point, the version string is a snapshot version, but the project set to a release version.
-    // This is typically when the snapshot version string was not updated.
-    logger.error("Version string is a snapshot version, but property 'allowNonSnapshotRelease' is present.")
-}
-
