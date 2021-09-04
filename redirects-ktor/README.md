@@ -10,7 +10,7 @@ Replace `VERSION` by any of the versions available [here](https://github.com/uty
 
 ```groovy
 repositories {
-    maven { url 'https://maven.pkg.github.com/utybo/Servine' }
+    maven { url 'https://gitlab.com/api/v4/projects/29365238/packages/maven' }
 }
 
 dependencies {
@@ -24,7 +24,7 @@ dependencies {
 ```kotlin
 repositories {
     maven {
-        url = uri("https://maven.pkg.github.com/utybo/Servine")
+        url = uri("https://gitlab.com/api/v4/projects/29365238/packages/maven")
     }
 }
 
@@ -42,7 +42,7 @@ dependencies {
 <!-- Add this to your repositories -->
 <repository>
     <id>utybo-github-com-Servine</id>
-    <url>https://maven.pkg.github.com/utybo/Servine</url>
+    <url>https://gitlab.com/api/v4/projects/29365238/packages/maven</url>
 </repository>
 
 <!-- Add this to your dependencies -->
@@ -59,7 +59,7 @@ dependencies {
 <summary>📖 <strong>Kotlin main.kts script</strong></summary>
 
 ```kotlin
-@file:Repository("https://maven.pkg.github.com/utybo/Servine")
+@file:Repository("https://gitlab.com/api/v4/projects/29365238/packages/maven")
 @file:DependsOn("guru.zoroark.servine:redirects-ktor:VERSION")
 ```
 

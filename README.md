@@ -6,6 +6,8 @@ Experimental toolkit for working with `_redirects` file.
 * `redirects-ktor` Redirection plugin with support for `_redirects` files for [Ktor](https://ktor.io)
 * `servine` Local HTTP server with support for `_redirects` files
 
+**CAUTION:** All libraries are published on [GitLab](https://gitlab.com/utybo/packages/-/packages?search[]=guru%2Fzoroark%2Fservine), despite a "Packages" section being present on this repository.
+
 > ⚡ This app and its libraries are under heavy development and are not stable yet. Moreover, they should only be used for development purposes only - very little sanity checks are performed.
 
 ## Features
@@ -35,7 +37,7 @@ Refer to the following for compatibility information
 
 1. These files can be parsed, but not all features are supported -- refer to the table to know which ones are.
 2. Only status codes 302, 301, 404 and 200 are supported.
-3. The post-url `*` is supported, but the `:splat` placeholder is not.
+3. The post-url `*` is supported, but the `:splat` placeholder is not, nor is `*` anywhere except at the end of the URL.
 4. Parsed as a regular string -- not exposed in any particular way. This is not actively tested and will be at a later date.
 
 ## `redirects-parser`
