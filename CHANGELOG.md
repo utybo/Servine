@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Added `-p` option for selecting a different port.
+
+### Fixed
+
+- Fixed path order being reversed due to incorrect normalization logic.
+
 ### Removed
 
 - Removed `DEBUG`-level log outputs from Servine.
