@@ -2,14 +2,17 @@ plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     id 'org.jetbrains.kotlin.jvm'
     id 'org.jetbrains.dokka'
+
+    id 'com.github.ben-manes.versions'
 }
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
-}
 
-def libs = project.extensions.getByType(VersionCatalogsExtension).named("libs")
+    // Used for Shedinja
+    maven { url 'https://gitlab.com/api/v4/projects/29365238/packages/maven' }
+}
 
 version = rootProject.version
 group = rootProject.group

@@ -1,0 +1,11 @@
+plugins {
+    id 'guru.zoroark.servine.kotlin-library-conventions'
+}
+
+dependencies {
+    api libs.ktor.server.core
+    implementation libs.bundles.jackson
+
+    implementation libs.ktor.server.websockets
+    implementation libs.ktor.server.hostCommon
+}

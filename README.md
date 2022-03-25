@@ -51,3 +51,7 @@ Refer to the following for compatibility information
 ## `servine`
 
 [See the module's README file for more information.](servine/README.md)
+
+## `servine-livereload`
+
+[See the module's README file for more information.](servine-livereload/README.md)
