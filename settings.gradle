@@ -1,4 +1,2 @@
-enableFeaturePreview("VERSION_CATALOGS")
-
 rootProject.name = 'Servine'
-include('servine', 'redirects-parser', 'redirects-ktor', 'samples')
+include('servine', 'servine-livereload', 'redirects-parser', 'redirects-ktor', 'samples')

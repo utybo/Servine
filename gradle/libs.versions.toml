@@ -1,15 +1,19 @@
 [versions]
-kotlin = "1.5.21"
-ktor = "1.6.2"
-junit = "5.7.2"
-atrium = "0.16.0"
-clikt = "3.2.0"
+kotlin = "1.6.10"
+ktor = "1.6.8"
+jackson = "2.13.0"
+junit = "5.8.2"
+atrium = "0.17.0"
+clikt = "3.4.0"
 jimfs = "1.2"
-logback = "1.2.3"
-dokka = "1.5.0"
+logback = "1.2.11"
+dokka = "1.6.10"
 bcv = "0.6.0"
+versions = "0.39.0"
+shedinja = "0.0.3"
 
 [libraries]
+
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-bcv = { module = "org.jetbrains.kotlinx.binary-compatibility-validator:org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin", version.ref = "bcv"}
 kotlin-dokkaGradle = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
@@ -17,13 +21,27 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.re
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 
 ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
+ktor-server-hostCommon = { module = "io.ktor:ktor-server-host-common", version.ref = "ktor" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
+ktor-server-websockets = { module = "io.ktor:ktor-websockets", version.ref = "ktor" }
+
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
+jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
+
+shedinja = { module = "guru.zoroark.shedinja:shedinja", version.ref = "shedinja" }
+shedinja-services = { module = "guru.zoroark.shedinja:shedinja-services", version.ref = "shedinja" }
 
 clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt"}
 
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
+versionsPluginGradle = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "versions" }
+
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 atrium = { module = "ch.tutteli.atrium:atrium-fluent-en_GB", version.ref = "atrium" }
 ktor-server-testHost = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 jimfs = { module = "com.google.jimfs:jimfs", version.ref = "jimfs" }
+
+[bundles]
+jackson = ["jackson-databind", "jackson-kotlin"]
+shedinja = ["shedinja", "shedinja-services"]

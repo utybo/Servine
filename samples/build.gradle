@@ -10,7 +10,7 @@ def createSampleTaskForSourceSet(String sourceSampleDir) {
         classpath = project(":servine").sourceSets.main.runtimeClasspath
         mainClass = 'guru.zoroark.servine.app.AppKt'
 
-        args project.layout.projectDirectory.dir(sourceSampleDir).toString()
+        args = [project.layout.projectDirectory.dir(sourceSampleDir).toString(), "-r"]
     }
 }
 

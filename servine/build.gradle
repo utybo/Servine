@@ -5,9 +5,12 @@ plugins {
 
 dependencies {
     implementation project(':redirects-ktor')
+    implementation project(':servine-livereload')
+
     implementation libs.clikt
     implementation libs.ktor.server.netty
     implementation libs.logback
+    implementation libs.bundles.shedinja
 }
 
 application {
