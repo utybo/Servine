@@ -6,6 +6,8 @@ import guru.zoroark.servine.redirects.ktor.from
 import guru.zoroark.shedinja.environment.InjectionScope
 import guru.zoroark.shedinja.environment.invoke
 import guru.zoroark.shedinja.extensions.services.SuspendShedinjaService
+import io.ktor.application.ApplicationStopping
+import io.ktor.application.EventDefinition
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.http.ContentType
@@ -33,10 +35,6 @@ class KtorApp(scope: InjectionScope) : SuspendShedinjaService {
     override suspend fun start() {
         server = embeddedServer(Netty, port = config.port) {
             install(Redirects) { loadRedirectsFile() }
-            install(ShutDownUrl.ApplicationCallFeature) {
-                shutDownUrl = "/_servine/stop"
-                exitCodeSupplier = { 0 }
-            }
             routing {
                 get("/{segments...}") {
                     val segments = call.parameters.getAll("segments")

@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Added `-p` option for selecting a different port.
 - Added `-r` option for enabling LiveReload support.
+- Added utility endpoints to Servine
+  - `/_servine/reload` to forcibly reload connected LiveReload clients (only works if LiveReload option is enabled)
 
 ### Changed
 

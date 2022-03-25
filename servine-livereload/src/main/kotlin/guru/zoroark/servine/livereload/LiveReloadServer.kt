@@ -66,7 +66,7 @@ public class LiveReloadServer {
                         }
                     }
                 }
-                logger.info("Session finished") // TODO rm
+                logger.debug("Session finished")
             }
             static {
                 resource("livereload.js", "livereload.js", "guru.zoroark.servine.livereload")
