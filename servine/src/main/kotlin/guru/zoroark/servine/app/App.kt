@@ -43,9 +43,9 @@ class App : CliktCommand(
         """.trimIndent()
 ) {
     private val directory: String by argument(help = "The directory that should be served.")
-    private val port: Int by option("-p", help = "Port onto which the server should be started")
+    private val port: Int by option("-p", help = "Port onto which the server should be started (8080 by default).")
         .int().default(8080)
-    private val liveReload: Boolean by option("-r", help = "Enable LiveReload support.").flag(default = false)
+    private val liveReload: Boolean by option("-r", help = "Enable LiveReload support, which will automatically reload your browser when you change a file served by Servine.").flag(default = false)
 
     override fun run() {
         require(port in 0..65535) { "$port is not a valid port number." }

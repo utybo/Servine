@@ -20,6 +20,9 @@ Usage: servine [OPTIONS] DIRECTORY
   server and lacks critical security features.
 
 Options:
+  -p INT      Port onto which the server should be started
+  -r          Enable LiveReload support, which will automatically reload your
+              browser when you change a file served by Servine.
   -h, --help  Show this message and exit
 
 Arguments:
